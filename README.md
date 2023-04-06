@@ -8,7 +8,7 @@
 
 **Ссылка на проект**
 
-* [Ссылка на GitHub Pages](https://emelyanova-arina-29.github.io/mesto)
+* [Ссылка на GitHub Pages](https://emelyanova-arina-29.github.io/mesto-react/)
 
 
 
