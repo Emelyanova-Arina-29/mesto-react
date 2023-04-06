@@ -19,8 +19,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       })
       .catch((err) => console.log(`Произошла ошибка: ${err}`)
       )
-    }
-  )
+    }, [])
 
   useEffect(() => {
     api
