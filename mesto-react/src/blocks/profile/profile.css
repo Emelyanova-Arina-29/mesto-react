@@ -1,0 +1,19 @@
+.profile {
+  padding-top: 40px;
+  padding-bottom: 50px;
+  display: grid;
+  grid-template-areas:
+  "avatar info . add";
+  align-items: center;
+  grid-template-columns: auto auto minmax(10px, 244px) auto;
+  grid-auto-flow: row;
+  }
+
+@media screen and (max-width: 860px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 36px;
+  }
+ }
