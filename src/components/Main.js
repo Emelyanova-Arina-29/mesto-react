@@ -1,25 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import api from '../utils/Api';
 import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete }) {
   
-  const [userName, setUserName] = useState("")
-  const [userDescription, setUserDescription] = useState("")
-  const [userAvatar, setUserAvatar] = useState("")
+  const currentUser = React.useContext(CurrentUserContext);
+
   const [cards, setCards] = useState([])
-  
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((userData) => {
-        setUserName(userData.name)
-        setUserDescription(userData.about)
-        setUserAvatar(userData.avatar)
-      })
-      .catch((err) => console.log(`Произошла ошибка: ${err}`)
-      )
-    }, [])
 
   useEffect(() => {
     api
@@ -33,14 +21,14 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   return (
     <main className="content">
       <section className="profile">
-        <img className="profile__avatar" src={userAvatar} alt="Фото пользователя" />
+        <img className="profile__avatar" src={currentUser.avatar} alt="Фото пользователя" />
         <button className="profile__edit-avatar" aria-label="Кнопка обновления аватара" type="button" onClick={onEditAvatar}></button>
         <div className="profile__info">
           <div className="profile__fullname">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button className="profile__edit" aria-label="Редактировать профиль" type="button" onClick={onEditProfile} ></button>
           </div>
-          <p className="profile__description">{userDescription}</p>
+          <p className="profile__description">{currentUser.about}</p>
         </div>
         <button className="profile__add" type="button" aria-label="Добавить карточку" onClick={onAddPlace} ></button>
       </section>
@@ -52,6 +40,8 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
                         link={card.link}
                         likes={card.likes}
                         onCardClick={onCardClick}
+                        onCardLike={onCardLike}
+                        onCardDelete={onCardDelete}
                         />)
         }))}
       </section>
