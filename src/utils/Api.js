@@ -27,11 +27,11 @@ class Api {
 
   /* Добавление новой карточки */
 
-  createCard(name, link) {
+  createCard(data) {
     return fetch(`${this._url}/cards`, {
       headers: this._headers,
       method: 'POST',
-      body: JSON.stringify({ name: name, link: link })
+      body: JSON.stringify({ name: data.name, link: data.link })
     })
       .then(this._handleResponse)
   }
@@ -77,22 +77,25 @@ class Api {
 
   /* Редактирование профиля */
 
-  editUserInfo(name, about) {
+  editUserInfo(data) {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
       method: 'PATCH',
-      body: JSON.stringify({ name: name, about: about })
+      body: JSON.stringify({
+				name: data.name,
+				about: data.about
+			})
     })
       .then(this._handleResponse)
   }
-
+  
   /* Изменение аватара пользователя */
 
-  editUserAvatar(photo) {
+  editUserAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       headers: this._headers,
       method: 'PATCH',
-      body: JSON.stringify({ avatar: photo })
+      body: JSON.stringify({ avatar: data.avatar })
     })
       .then(this._handleResponse)
   }
